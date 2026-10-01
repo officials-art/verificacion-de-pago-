@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title id="pageTitle">Request Submitted</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --blue: #2563eb;
+            --purple: #7c3aed;
+            --green: #22c55e;
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.70);
+            --border: rgba(255, 255, 255, 0.18);
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--text);
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(59, 130, 246, 0.45),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(124, 58, 237, 0.50),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07142f 0%,
+                    #101d48 45%,
+                    #25105c 100%
+                );
+
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(70px);
+            opacity: 0.35;
+            animation: floatLight 8s ease-in-out infinite alternate;
+        }
+
+        body::before {
+            top: -100px;
+            left: -90px;
+            background: #3b82f6;
+        }
+
+        body::after {
+            right: -100px;
+            bottom: -100px;
+            background: #8b5cf6;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatLight {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(25px, 20px) scale(1.12);
+            }
+        }
+
+        .card {
+            width: 100%;
+            max-width: 500px;
+
+            position: relative;
+            z-index: 2;
+
+            padding: 38px 30px 30px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.16),
+                    rgba(255, 255, 255, 0.065)
+                );
+
+            border: 1px solid var(--border);
+
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+
+            box-shadow:
+                0 35px 90px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+            text-align: center;
+
+            overflow: hidden;
+
+            animation: cardIn 0.7s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3b82f6,
+                    #8b5cf6,
+                    #22c55e
+                );
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            top: -100px;
+            right: -70px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.08);
+            filter: blur(5px);
+
+            pointer-events: none;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .icon {
+            width: 82px;
+            height: 82px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(34, 197, 94, 0.26),
+                    rgba(22, 163, 74, 0.10)
+                );
+
+            border: 1px solid rgba(134, 239, 172, 0.35);
+
+            box-shadow:
+                0 12px 35px rgba(34, 197, 94, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+
+            font-size: 38px;
+
+            animation: iconPop 0.7s 0.15s both;
+        }
+
+        .icon::before {
+            content: "";
+            position: absolute;
+            inset: -7px;
+
+            border-radius: 30px;
+
+            border: 1px solid rgba(134, 239, 172, 0.12);
+
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes iconPop {
+            from {
+                opacity: 0;
+                transform: scale(0.6) rotate(-8deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 0.2;
+            }
+        }
+
+        h1 {
+            font-size: clamp(25px, 6vw, 31px);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+
+            margin-bottom: 17px;
+
+            font-weight: 800;
+        }
+
+        .greeting {
+            font-size: 17px;
+            font-weight: 700;
+
+            margin-bottom: 13px;
+
+            color: rgba(255, 255, 255, 0.94);
+        }
+
+        #userName {
+            color: #ffffff;
+        }
+
+        .message {
+            max-width: 410px;
+            margin: 0 auto 26px;
+
+            font-size: 15px;
+            line-height: 1.75;
+
+            color: var(--muted);
+        }
+
+        .contact {
+            text-align: left;
+
+            padding: 21px;
+
+            border-radius: 21px;
+
+            background:
+                rgba(3, 10, 30, 0.25);
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+            animation: contentIn 0.7s 0.25s both;
+        }
+
+        @keyframes contentIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-title {
+            font-size: 13px;
+            line-height: 1.5;
+            font-weight: 700;
+
+            color: rgba(255, 255, 255, 0.78);
+
+            margin-bottom: 17px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            margin-bottom: 12px;
+
+            padding: 12px 13px;
+
+            border-radius: 13px;
+
+            background: rgba(255, 255, 255, 0.055);
+
+            border: 1px solid rgba(255, 255, 255, 0.075);
+        }
+
+        .contact-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            min-width: 72px;
+
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+
+            color: rgba(255, 255, 255, 0.52);
+        }
+
+        .value {
+            font-size: 14px;
+            font-weight: 700;
+
+            color: #ffffff;
+
+            word-break: break-word;
+        }
+
+        .success {
+            margin-top: 21px;
+
+            padding: 15px 16px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(34, 197, 94, 0.17),
+                    rgba(22, 163, 74, 0.08)
+                );
+
+            border: 1px solid rgba(134, 239, 172, 0.23);
+
+            color: rgba(255, 255, 255, 0.94);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        /* Temporary unavailable screen */
+
+        .unavailable {
+            display: none;
+        }
+
+        .unavailable-icon {
+            width: 82px;
+            height: 82px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(245, 158, 11, 0.22),
+                    rgba(234, 88, 12, 0.08)
+                );
+
+            border: 1px solid rgba(253, 186, 116, 0.30);
+
+            box-shadow:
+                0 12px 35px rgba(245, 158, 11, 0.12);
+
+            font-size: 36px;
+        }
+
+        .unavailable h1 {
+            margin-bottom: 15px;
+        }
+
+        .unavailable-message {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .unavailable-notice {
+            margin-top: 22px;
+            padding: 15px;
+
+            border-radius: 15px;
+
+            background: rgba(245, 158, 11, 0.10);
+            border: 1px solid rgba(253, 186, 116, 0.20);
+
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 16px;
+            }
+
+            .card {
+                padding: 32px 20px 24px;
+                border-radius: 25px;
+            }
+
+            .icon,
+            .unavailable-icon {
+                width: 76px;
+                height: 76px;
+                border-radius: 22px;
+                font-size: 35px;
+            }
+
+            .contact {
+                padding: 17px;
+            }
+
+            .contact-row {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .label {
+                min-width: auto;
+            }
+
+            .value {
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- Normal confirmation screen -->
+
+    <div id="confirmationScreen">
+
+        <div class="icon">✅</div>
+
+        <h1 id="requestTitle">Request Submitted</h1>
+
+        <div class="greeting">
+            <span id="dearText">Dear</span>
+            <span id="userName">User</span>,
+        </div>
+
+        <div class="message" id="messageText">
+            Your request has been submitted successfully.
+            Please wait while your request is being processed.
+        </div>
+
+        <div class="contact">
+
+            <div class="contact-title" id="contactTitle">
+                For more information, please contact our Agent:
+            </div>
+
+            <div class="contact-row">
+                <span class="label" id="whatsappLabel">
+                    WhatsApp
+                </span>
+
+                <span class="value">
+                    +1 (587) 681-2277
+                </span>
+            </div>
+
+            <div class="contact-row">
+                <span class="label" id="emailLabel">
+                    E-mail
+                </span>
+
+                <span class="value">
+                    trustconsultant10@gmail.com
+                </span>
+            </div>
+
+        </div>
+
+        <div class="success" id="successText">
+            ✅ Withdrawal request submitted
+        </div>
+
+    </div>
+
+
+    <!-- Temporary unavailable screen -->
+
+    <div id="unavailableScreen" class="unavailable">
+
+        <div class="unavailable-icon">
+            ⚠️
+        </div>
+
+        <h1 id="unavailableTitle">
+            Temporarily Unavailable
+        </h1>
+
+        <div class="unavailable-message" id="unavailableMessage">
+            Temporary unavailable or incorrect parameters which can't be processed
+        </div>
+
+        <div class="unavailable-notice">
+            Please try again later.
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+     * =====================================================
+     * TRUE / FALSE SWITCH
+     * =====================================================
+     *
+     * true  = Show the normal confirmation page
+     * false = Show the temporary unavailable page
+     *
+     * Change ONLY this value when you want to switch modes.
+     */
+
+    const confirmationEnabled = false;
+
+
+    /*
+     * =====================================================
+     * ACCOUNT INFORMATION
+     * =====================================================
+     */
+
+    const accountData = JSON.parse(
+        localStorage.getItem("loginAccount") || "{}"
+    );
+
+    const userName =
+        accountData.fullName || "User";
+
+    document.getElementById("userName").textContent =
+        userName;
+
+
+    /*
+     * =====================================================
+     * LANGUAGE SYSTEM
+     * English + Español
+     * =====================================================
+     */
+
+    const language =
+        localStorage.getItem("language") || "en";
+
+
+    const translations = {
+
+        en: {
+            title: "Request Submitted",
+
+            dear: "Dear",
+
+            message:
+                "Your request has been submitted successfully. Please wait while your request is being processed.",
+
+            contact:
+                "For more information, please contact our Agent:",
+
+            whatsapp: "WhatsApp",
+
+            email: "E-mail",
+
+            success:
+                "✅ Withdrawal request submitted",
+
+            unavailableTitle:
+                "Temporarily Unavailable",
+
+            unavailableMessage:
+                "Temporary unavailable or incorrect parameters which can't be processed",
+
+            unavailableNotice:
+                "Please try again later."
+        },
+
+
+        es: {
+
+            title:
+                "Solicitud enviada",
+
+            dear:
+                "Estimado/a",
+
+            message:
+                "Su solicitud se ha enviado correctamente. Espere mientras se procesa su solicitud.",
+
+            contact:
+                "Para obtener más información, comuníquese con nuestro agente:",
+
+            whatsapp:
+                "WhatsApp",
+
+            email:
+                "Correo electrónico",
+
+            success:
+                "✅ Solicitud de retiro enviada",
+
+            unavailableTitle:
+                "Temporalmente no disponible",
+
+            unavailableMessage:
+                "Temporalmente no disponible o hay parámetros incorrectos que no se pueden procesar",
+
+            unavailableNotice:
+                "Por favor, inténtelo de nuevo más tarde."
+        }
+
+    };
+
+
+    const t =
+        translations[language] || translations.en;
+
+
+    /*
+     * =====================================================
+     * APPLY LANGUAGE
+     * =====================================================
+     */
+
+    document.getElementById("pageTitle").textContent =
+        confirmationEnabled
+            ? t.title
+            : t.unavailableTitle;
+
+
+    document.getElementById("requestTitle").textContent =
+        t.title;
+
+
+    document.getElementById("dearText").textContent =
+        t.dear;
+
+
+    document.getElementById("messageText").textContent =
+        t.message;
+
+
+    document.getElementById("contactTitle").textContent =
+        t.contact;
+
+
+    document.getElementById("whatsappLabel").textContent =
+        t.whatsapp;
+
+
+    document.getElementById("emailLabel").textContent =
+        t.email;
+
+
+    document.getElementById("successText").textContent =
+        t.success;
+
+
+    document.getElementById("unavailableTitle").textContent =
+        t.unavailableTitle;
+
+
+    document.getElementById("unavailableMessage").textContent =
+        t.unavailableMessage;
+
+
+    document.querySelector(".unavailable-notice").textContent =
+        t.unavailableNotice;
+
+
+    /*
+     * =====================================================
+     * TRUE / FALSE DISPLAY CONTROL
+     * =====================================================
+     */
+
+    const confirmationScreen =
+        document.getElementById("confirmationScreen");
+
+    const unavailableScreen =
+        document.getElementById("unavailableScreen");
+
+
+    if (confirmationEnabled === true) {
+
+        confirmationScreen.style.display = "block";
+
+        unavailableScreen.style.display = "none";
+
+    } else {
+
+        confirmationScreen.style.display = "none";
+
+        unavailableScreen.style.display = "block";
+
+    }
+
+</script>
+
+</body>
+
+</html>

