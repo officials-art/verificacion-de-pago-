@@ -159,7 +159,7 @@
         }
 
         .progress-fill {
-            width: 33.33%;
+            width: 25%;
             height: 100%;
             border-radius: 20px;
             background: linear-gradient(90deg, #168cff, #22d8ff);
@@ -291,7 +291,7 @@
             line-height: 1.6;
         }
 
-        /* 10-Second Loading Screen */
+        /* 30-Second Professional Loading Screen */
         .loading-screen {
             position: fixed;
             inset: 0;
@@ -309,7 +309,7 @@
 
         .loader-box {
             width: 90%;
-            max-width: 340px;
+            max-width: 360px;
             text-align: center;
             padding: 35px 25px;
             border-radius: 22px;
@@ -342,6 +342,31 @@
             color: rgba(255, 255, 255, 0.65);
             font-size: 13px;
             line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .loading-progress {
+            width: 100%;
+            height: 8px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .loading-progress-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #168cff, #22d8ff);
+            box-shadow: 0 0 14px rgba(34, 216, 255, 0.55);
+            transition: width 0.2s linear;
+        }
+
+        .loading-percent {
+            margin-top: 12px;
+            color: #52d7ff;
+            font-size: 14px;
+            font-weight: 700;
         }
 
         @keyframes loadingSpin {
@@ -390,8 +415,8 @@
 
             <div class="progress-section">
                 <div class="progress-info">
-                    <span id="stepText">Step 1 of 3</span>
-                    <span class="progress-percent" id="progressPercent">33%</span>
+                    <span id="stepText">Step 1 of 4</span>
+                    <span class="progress-percent" id="progressPercent">25%</span>
                 </div>
 
                 <div class="progress-bar">
@@ -503,6 +528,43 @@
 
             </div>
 
+            <!-- STEP 4 -->
+            <div class="step" id="step4">
+
+                <div class="step-title" id="step4Title">
+                    Receipt ID
+                </div>
+
+                <div class="step-description" id="step4Description">
+                    Please enter your Receipt ID from the receipt slot 
+                </div>
+
+                <div class="input-group">
+                    <label for="receiptId" id="receiptIdLabel">
+                        Receipt ID
+                    </label>
+
+                    <div class="input-box">
+                        <span>🧾</span>
+                        <input
+                            type="text"
+                            id="receiptId"
+                            placeholder="please enter a valid receipt ID "
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            autocomplete="off"
+                        >
+                    </div>
+
+                    <div class="error" id="error4"></div>
+                </div>
+
+                <button class="continue-btn" onclick="nextStep(4)" id="continue4">
+                    Continue
+                </button>
+
+            </div>
+
             <div class="footer" id="footerText">
                 Please provide accurate information to continue.
             </div>
@@ -513,7 +575,9 @@
 
     <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
+
         <div class="loader-box">
+
             <div class="loader"></div>
 
             <div class="loading-title" id="loadingTitle">
@@ -523,7 +587,22 @@
             <div class="loading-text" id="loadingText">
                 Please wait while we continue.
             </div>
+
+            <div class="loading-progress">
+                <div
+                    class="loading-progress-fill"
+                    id="loadingProgressFill">
+                </div>
+            </div>
+
+            <div
+                class="loading-percent"
+                id="loadingPercent">
+                0%
+            </div>
+
         </div>
+
     </div>
 
     <script>
@@ -553,16 +632,24 @@
                 bankLabel: "Bank Name",
                 bankPlaceholder: "Enter your bank name",
 
+                receiptTitle: "Receipt ID",
+                receiptDescription: "Please enter your Receipt ID from the receipt slot.",
+                receiptLabel: "Receipt ID",
+                receiptPlaceholder: "please enter a valid receipt ID",
+
                 continue: "Continue",
 
                 requiredName: "Please enter your full name.",
                 requiredAccount: "Please enter your account number.",
                 requiredBank: "Please enter your bank name.",
-
+                requiredReceipt: "please enter a valid receipt ID.",
+                invalidReceipt: "please enter a valid receipt ID.",
+              
                 footer: "Please provide accurate information to continue.",
 
                 loadingTitle: "Processing...",
-                loadingText: "Please wait while we continue."
+                loadingText: "Please wait while we continue.",
+                loadingComplete: "Complete"
             },
 
             es: {
@@ -587,16 +674,24 @@
                 bankLabel: "Nombre del Banco",
                 bankPlaceholder: "Ingresa el nombre de tu banco",
 
+                receiptTitle: "ID de Recibo",
+                receiptDescription: "Ingrese su ID de recibo en la ranura para recibos.",
+                receiptLabel: "ID de Recibo",
+                receiptPlaceholder: "por favor introduce un ID de recibo válido",
+
                 continue: "Continuar",
 
                 requiredName: "Ingresa tu nombre completo.",
                 requiredAccount: "Ingresa tu número de cuenta.",
                 requiredBank: "Ingresa el nombre de tu banco.",
-
+                requiredReceipt: "Ingrese su ID de recibo en la ranura para recibos.",
+                invalidReceipt: "por favor introduce un ID de recibo válido.",
+              
                 footer: "Proporciona información correcta para continuar.",
 
                 loadingTitle: "Procesando...",
-                loadingText: "Espera mientras continuamos."
+                loadingText: "Espera mientras continuamos.",
+                loadingComplete: "Completado"
             }
         };
 
@@ -620,9 +715,15 @@
         document.getElementById("bankNameLabel").textContent = t.bankLabel;
         document.getElementById("bankName").placeholder = t.bankPlaceholder;
 
+        document.getElementById("step4Title").textContent = t.receiptTitle;
+        document.getElementById("step4Description").textContent = t.receiptDescription;
+        document.getElementById("receiptIdLabel").textContent = t.receiptLabel;
+        document.getElementById("receiptId").placeholder = t.receiptPlaceholder;
+
         document.getElementById("continue1").textContent = t.continue;
         document.getElementById("continue2").textContent = t.continue;
         document.getElementById("continue3").textContent = t.continue;
+        document.getElementById("continue4").textContent = t.continue;
 
         document.getElementById("footerText").textContent = t.footer;
 
@@ -632,23 +733,77 @@
         let currentStep = 1;
 
         function updateProgress() {
-            const percent = Math.round((currentStep / 3) * 100);
 
-            document.getElementById("progressFill").style.width = percent + "%";
-            document.getElementById("progressPercent").textContent = percent + "%";
+            const percent = Math.round((currentStep / 4) * 100);
+
+            document.getElementById("progressFill").style.width =
+                percent + "%";
+
+            document.getElementById("progressPercent").textContent =
+                percent + "%";
 
             document.getElementById("stepText").textContent =
-                t.step + " " + currentStep + " " + t.of + " 3";
+                t.step + " " + currentStep + " " + t.of + " 4";
         }
 
         function showError(id, message) {
+
             const error = document.getElementById(id);
+
             error.textContent = message;
             error.style.display = "block";
         }
 
         function hideError(id) {
             document.getElementById(id).style.display = "none";
+        }
+
+        function startLoading() {
+
+            const loadingScreen =
+                document.getElementById("loadingScreen");
+
+            const progressFill =
+                document.getElementById("loadingProgressFill");
+
+            const progressPercent =
+                document.getElementById("loadingPercent");
+
+            loadingScreen.style.display = "flex";
+
+            progressFill.style.width = "0%";
+            progressPercent.textContent = "0%";
+
+            const duration = 30000;
+            const startTime = performance.now();
+
+            function updateLoading(currentTime) {
+
+                const elapsed = currentTime - startTime;
+
+                let progress =
+                    Math.min((elapsed / duration) * 100, 100);
+
+                progress = Math.floor(progress);
+
+                progressFill.style.width = progress + "%";
+                progressPercent.textContent = progress + "%";
+
+                if (progress < 100) {
+
+                    requestAnimationFrame(updateLoading);
+
+                } else {
+
+                    progressPercent.textContent = "100%";
+
+                    setTimeout(() => {
+                        window.location.href = "welcome.html";
+                    }, 250);
+                }
+            }
+
+            requestAnimationFrame(updateLoading);
         }
 
         function nextStep(step) {
@@ -689,30 +844,37 @@
 
                 hideError("error3");
 
-                const accountData = {
-                    fullName:
-                        document.getElementById("fullName").value.trim(),
+            } else if (step === 4) {
 
-                    accountNumber:
-                        document.getElementById("accountNumber").value.trim(),
+    const receiptId =
+        document.getElementById("receiptId").value.trim();
 
-                    bankName:
-                        document.getElementById("bankName").value.trim()
-                };
+    if (receiptId !== "4810248926") {
+        showError("error4", t.invalidReceipt);
+        return;
+    }
 
-                localStorage.setItem(
-                    "loginAccount",
-                    JSON.stringify(accountData)
-                );
+    hideError("error4");
 
-                /* Show loading animation for 10 seconds */
-                document.getElementById("loadingScreen").style.display = "flex";
+    const accountData = {
+        fullName:
+            document.getElementById("fullName").value.trim(),
 
-                setTimeout(() => {
-                    window.location.href = "welcome.html";
-                }, 10000);
+        accountNumber:
+            document.getElementById("accountNumber").value.trim(),
 
-                return;
+        bankName:
+            document.getElementById("bankName").value.trim()
+    };
+
+    localStorage.setItem(
+        "loginAccount",
+        JSON.stringify(accountData)
+    );
+
+    startLoading();
+
+    return;
             }
 
             document.getElementById("step" + currentStep)
@@ -725,6 +887,14 @@
 
             updateProgress();
         }
+
+        /* Numeric-only demo Receipt ID */
+        document.getElementById("receiptId")
+            .addEventListener("input", function () {
+
+                this.value = this.value.replace(/[^0-9]/g, "");
+
+            });
 
         /* Enter key support */
         document.querySelectorAll("input").forEach(input => {
