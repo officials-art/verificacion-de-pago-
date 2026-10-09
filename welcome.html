@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Incoming Transfers</title>
-
-<style>
-
+<title>Incoming Transfers</title><style>
 * {
     box-sizing: border-box;
     margin: 0;
@@ -47,20 +41,16 @@ body {
     margin: auto;
 }
 
-
 /* ================= TOP HEADER ================= */
 
 .top-header {
     position: relative;
     overflow: hidden;
-
     padding: 28px 25px 30px;
-
     border-radius: 24px;
     margin-bottom: 18px;
 
     background: rgba(255,255,255,0.075);
-
     border: 1px solid rgba(255,255,255,0.13);
 
     box-shadow:
@@ -73,24 +63,19 @@ body {
 
 .top-header::before {
     content: "";
-
     position: absolute;
-
     top: 0;
     left: 0;
     right: 0;
-
     height: 4px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #4d7cff,
-            #7c4dff,
-            #00c6ff
-        );
+    background: linear-gradient(
+        90deg,
+        #4d7cff,
+        #7c4dff,
+        #00c6ff
+    );
 }
-
 
 /* ================= BRAND ================= */
 
@@ -98,23 +83,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 15px;
-
     margin-bottom: 25px;
 }
 
 .brand {
     display: flex;
     align-items: center;
-
     gap: 10px;
 }
 
 .brand-icon {
     width: 42px;
     height: 42px;
-
     border-radius: 13px;
 
     display: flex;
@@ -123,12 +104,11 @@ body {
 
     font-size: 20px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(74,116,255,0.95),
-            rgba(122,71,255,0.95)
-        );
+    background: linear-gradient(
+        135deg,
+        rgba(74,116,255,0.95),
+        rgba(122,71,255,0.95)
+    );
 
     box-shadow:
         0 8px 25px rgba(72,92,255,0.30);
@@ -136,75 +116,55 @@ body {
 
 .brand-text strong {
     display: block;
-
     font-size: 15px;
-
     letter-spacing: 0.3px;
 }
 
 .brand-text span {
     display: block;
-
     margin-top: 3px;
-
     color: rgba(255,255,255,0.58);
-
     font-size: 11px;
 }
 
 .secure-badge {
     padding: 7px 11px;
-
     border-radius: 30px;
-
     font-size: 10px;
     font-weight: bold;
-
     letter-spacing: 1px;
-
     color: #b9ffd7;
-
-    background:
-        rgba(35,220,125,0.09);
-
-    border:
-        1px solid rgba(35,220,125,0.25);
+    background: rgba(35,220,125,0.09);
+    border: 1px solid rgba(35,220,125,0.25);
 }
-
 
 /* ================= TITLE ================= */
 
 .title-section {
     display: flex;
     align-items: center;
-
     gap: 20px;
 }
-
 
 /* ================= ANIMATED DOLLAR RING ================= */
 
 .icon-wrapper {
     position: relative;
-
     width: 88px;
     height: 88px;
-
     flex-shrink: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(83,125,255,0.18),
-            rgba(83,125,255,0.04) 65%,
-            transparent 70%
-        );
+    background: radial-gradient(
+        circle,
+        rgba(83,125,255,0.18),
+        rgba(83,125,255,0.04) 65%,
+        transparent 70%
+    );
 
     box-shadow:
         0 0 30px rgba(79,117,255,0.20),
@@ -213,34 +173,22 @@ body {
 
 .loader-ring {
     position: absolute;
-
     inset: 2px;
-
     border-radius: 50%;
-
-    border:
-        3px solid rgba(255,255,255,0.08);
-
+    border: 3px solid rgba(255,255,255,0.08);
     border-top-color: #4d7cff;
     border-right-color: #7b55ff;
-
-    animation:
-        rotateRing 2.5s linear infinite;
+    animation: rotateRing 2.5s linear infinite;
 }
 
 .loader-ring::before {
     content: "";
-
     position: absolute;
-
     top: -4px;
     left: 50%;
-
     width: 7px;
     height: 7px;
-
     border-radius: 50%;
-
     background: #ffffff;
 
     box-shadow:
@@ -250,30 +198,19 @@ body {
 
 .loader-ring::after {
     content: "";
-
     position: absolute;
-
     inset: 7px;
-
     border-radius: 50%;
-
     border: 2px solid transparent;
-
-    border-bottom-color:
-        rgba(0,198,255,0.75);
-
-    animation:
-        rotateRingReverse 1.8s linear infinite;
+    border-bottom-color: rgba(0,198,255,0.75);
+    animation: rotateRingReverse 1.8s linear infinite;
 }
 
 .dollar {
     position: relative;
-
     z-index: 2;
-
     font-size: 31px;
     font-weight: 700;
-
     color: #ffffff;
 
     text-shadow:
@@ -282,121 +219,78 @@ body {
 }
 
 @keyframes rotateRing {
-
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes rotateRingReverse {
-
-    from {
-        transform: rotate(360deg);
-    }
-
-    to {
-        transform: rotate(0deg);
-    }
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
 }
-
 
 /* ================= TITLE TEXT ================= */
 
 .title-text h1 {
     font-size: 29px;
-
     line-height: 1.15;
-
     letter-spacing: -0.7px;
 }
 
 .title-text p {
     margin-top: 8px;
-
     max-width: 430px;
-
     color: rgba(255,255,255,0.62);
-
     font-size: 13px;
-
     line-height: 1.6;
 }
-
 
 /* ================= BLINKING STATUS ================= */
 
 .ready-status {
     margin-top: 23px;
-
     display: flex;
     align-items: center;
-
     gap: 9px;
-
     color: rgba(255,255,255,0.68);
-
     font-size: 12px;
 }
 
 .status-dot {
     width: 10px;
     height: 10px;
-
     flex-shrink: 0;
-
     border-radius: 50%;
-
     background: #31e98a;
 
     box-shadow:
         0 0 12px rgba(49,233,138,0.85);
 
-    animation:
-        statusBlink 1.4s ease-in-out infinite;
+    animation: statusBlink 1.4s ease-in-out infinite;
 }
 
 @keyframes statusBlink {
-
     0%, 100% {
         opacity: 1;
-
         transform: scale(1);
-
-        box-shadow:
-            0 0 12px rgba(49,233,138,0.85);
+        box-shadow: 0 0 12px rgba(49,233,138,0.85);
     }
 
     50% {
         opacity: 0.35;
-
         transform: scale(0.75);
-
-        box-shadow:
-            0 0 4px rgba(49,233,138,0.35);
+        box-shadow: 0 0 4px rgba(49,233,138,0.35);
     }
 }
-
 
 /* ================= MAIN CARD ================= */
 
 .card {
     position: relative;
-
     overflow: hidden;
-
     padding: 25px;
-
     margin-bottom: 18px;
-
     border-radius: 24px;
-
-    background:
-        rgba(255,255,255,0.93);
-
+    background: rgba(255,255,255,0.93);
     color: #152039;
 
     box-shadow:
@@ -406,281 +300,280 @@ body {
 
 .card::before {
     content: "";
-
     position: absolute;
-
     left: 0;
     right: 0;
     top: 0;
-
     height: 3px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #4777ff,
-            #7950ff,
-            #00b8ff
-        );
+    background: linear-gradient(
+        90deg,
+        #4777ff,
+        #7950ff,
+        #00b8ff
+    );
 }
-
 
 /* ================= TRANSFER SUMMARY ================= */
 
 .transfer-box {
     padding: 21px;
-
     margin-bottom: 22px;
-
     border-radius: 19px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f4f7ff,
-            #eef2ff
-        );
+    background: linear-gradient(
+        135deg,
+        #f4f7ff,
+        #eef2ff
+    );
 
-    border:
-        1px solid #e2e7f7;
+    border: 1px solid #e2e7f7;
 }
 
 .transfer-label {
     display: inline-flex;
-
     align-items: center;
-
     padding: 7px 11px;
-
     margin-bottom: 18px;
-
     border-radius: 20px;
-
     font-size: 10px;
-
     font-weight: 800;
-
     letter-spacing: 1.2px;
-
     color: #5368a0;
-
     background: #e8edff;
 }
 
 .currency-line {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 15px;
 }
 
 .currency {
     text-align: center;
-
     min-width: 115px;
 }
 
 .currency-code {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 6px;
-
     font-size: 14px;
-
     font-weight: 800;
-
     letter-spacing: 0.7px;
-
     color: #637199;
 }
 
 .flag {
     font-size: 20px;
-
     line-height: 1;
 }
 
 .currency-amount {
     margin-top: 6px;
-
     font-size: 26px;
-
     font-weight: 800;
-
     color: #172342;
-
     letter-spacing: -0.5px;
 }
 
-
-/* ================= TRANSFER ICON ================= */
+/* ================= ROLLING EXCHANGE ICON ================= */
 
 .arrow {
+    position: relative;
     width: 46px;
     height: 46px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
+    border-radius: 15px;
 
-    border-radius: 50%;
+    background: linear-gradient(
+        145deg,
+        #416dff 0%,
+        #6258ff 52%,
+        #8247f5 100%
+    );
 
-    color: #ffffff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #4d78ff,
-            #7750ff
-        );
-
-    font-size: 25px;
-
-    font-weight: 500;
-
-    line-height: 1;
+    border: 1px solid rgba(255,255,255,0.35);
 
     box-shadow:
-        0 8px 20px rgba(79,101,255,0.25);
+        0 7px 18px rgba(79,101,255,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.30);
 
-    text-shadow:
-        0 1px 3px rgba(0,0,0,0.20);
+    isolation: isolate;
+
+    animation: exchangePulse 3.2s ease-in-out infinite;
+}
+
+/* Soft halo surrounding the exchange icon */
+
+.arrow::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 19px;
+    border: 1px solid rgba(98,112,255,0.20);
+    z-index: -1;
+
+    animation: exchangeHalo 3.2s ease-in-out infinite;
+}
+
+/* Subtle light reflection */
+
+.arrow::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 7px;
+    width: 12px;
+    height: 35px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.10);
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+/* The complete exchange symbol rolls continuously */
+
+.exchange-icon {
+    width: 30px;
+    height: 30px;
+    display: block;
+    overflow: visible;
+
+    animation: exchangeRoll 2.2s linear infinite;
+}
+
+/* Continuous 360-degree rolling animation */
+
+@keyframes exchangeRoll {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Gentle breathing glow */
+
+@keyframes exchangePulse {
+    0%, 100% {
+        box-shadow:
+            0 7px 18px rgba(79,101,255,0.25),
+            inset 0 1px 0 rgba(255,255,255,0.30);
+    }
+
+    50% {
+        box-shadow:
+            0 9px 23px rgba(79,101,255,0.38),
+            0 0 12px rgba(93,111,255,0.12),
+            inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+}
+
+@keyframes exchangeHalo {
+    0%, 100% {
+        opacity: 0.45;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scale(1.06);
+    }
 }
 
 .fixed-label {
     margin-top: 16px;
-
     text-align: center;
-
     font-size: 11px;
-
     color: #7a849e;
-
     letter-spacing: 0.2px;
 }
-
 
 /* ================= DETAILS ================= */
 
 .section-title {
     margin-bottom: 12px;
-
     font-size: 12px;
-
     font-weight: 800;
-
     text-transform: uppercase;
-
     letter-spacing: 1px;
-
     color: #66708a;
 }
 
 .details {
     display: grid;
-
     gap: 10px;
-
     margin-bottom: 23px;
 }
 
 .detail-row {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     gap: 15px;
-
     padding: 15px 16px;
-
     border-radius: 14px;
-
     background: #f6f8fc;
-
-    border:
-        1px solid #edf0f6;
+    border: 1px solid #edf0f6;
 }
 
 .detail-label {
     font-size: 12px;
-
     color: #7a8398;
 }
 
 .detail-value {
     max-width: 60%;
-
     text-align: right;
-
     word-break: break-word;
-
     font-size: 13px;
-
     font-weight: 700;
-
     color: #202b45;
 }
-
 
 /* ================= NOTIFICATION ================= */
 
 .notification {
     padding: 19px;
-
     border-radius: 17px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f8f9ff,
-            #f3f5fb
-        );
+    background: linear-gradient(
+        135deg,
+        #f8f9ff,
+        #f3f5fb
+    );
 
-    border:
-        1px solid #e7eaf2;
+    border: 1px solid #e7eaf2;
 }
 
 .notification-title {
     display: flex;
-
     align-items: center;
-
     gap: 9px;
-
     margin-bottom: 10px;
-
     font-size: 14px;
-
     font-weight: 800;
-
     color: #25304a;
 }
 
 .notification-icon {
     width: 29px;
     height: 29px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     border-radius: 9px;
-
     background: #e8edff;
-
     color: #506ff0;
 }
 
@@ -694,59 +587,37 @@ body {
     margin-top: 8px;
     color: #7a849e !important;
     font-size: 12px !important;
-  }
+}
 
 .pending {
     display: inline-block;
-
     margin: 12px 0;
-
     padding: 6px 10px;
-
     border-radius: 20px;
-
     font-size: 10px;
-
     font-weight: 800;
-
     letter-spacing: 0.5px;
-
     color: #9a6a00;
-
     background: #fff4d6;
-
-    border:
-        1px solid #f4e2ac;
+    border: 1px solid #f4e2ac;
 }
 
 .input-label {
     display: block;
-
     margin: 16px 0 7px;
-
     font-size: 12px;
-
     font-weight: 700;
-
     color: #46516b;
 }
 
 .code-input {
     width: 100%;
-
     padding: 14px 15px;
-
     border-radius: 12px;
-
-    border:
-        1px solid #dce1ec;
-
+    border: 1px solid #dce1ec;
     outline: none;
-
     background: #ffffff;
-
     color: #172039;
-
     font-size: 14px;
 
     transition:
@@ -763,29 +634,20 @@ body {
 
 .submit-btn {
     width: 100%;
-
     margin-top: 13px;
-
     padding: 14px 18px;
-
     border: none;
-
     border-radius: 13px;
-
     cursor: pointer;
-
     color: #ffffff;
-
     font-size: 14px;
-
     font-weight: 800;
 
-    background:
-        linear-gradient(
-            135deg,
-            #4d78ff,
-            #7550ff
-        );
+    background: linear-gradient(
+        135deg,
+        #4d78ff,
+        #7550ff
+    );
 
     box-shadow:
         0 10px 22px rgba(77,103,255,0.25);
@@ -806,33 +668,25 @@ body {
     transform: translateY(1px);
 }
 
-
 /* ================= FOOTER ================= */
 
 .footer {
     text-align: center;
-
     padding: 6px 10px 15px;
-
     color: rgba(255,255,255,0.42);
-
     font-size: 11px;
-
     line-height: 1.5;
 }
-
 
 /* ================= MOBILE ================= */
 
 @media (max-width: 560px) {
-
     body {
         padding: 15px 10px;
     }
 
     .top-header {
         padding: 23px 19px 25px;
-
         border-radius: 21px;
     }
 
@@ -842,13 +696,11 @@ body {
 
     .secure-badge {
         font-size: 9px;
-
         padding: 6px 9px;
     }
 
     .title-section {
         gap: 15px;
-
         align-items: flex-start;
     }
 
@@ -871,7 +723,6 @@ body {
 
     .card {
         padding: 18px;
-
         border-radius: 21px;
     }
 
@@ -885,7 +736,6 @@ body {
 
     .currency {
         min-width: 0;
-
         flex: 1;
     }
 
@@ -904,8 +754,16 @@ body {
     .arrow {
         width: 38px;
         height: 38px;
+        border-radius: 13px;
+    }
 
-        font-size: 21px;
+    .arrow::before {
+        border-radius: 16px;
+    }
+
+    .exchange-icon {
+        width: 26px;
+        height: 26px;
     }
 
     .detail-row {
@@ -917,14 +775,15 @@ body {
     }
 }
 
-
 /* ================= REDUCED MOTION ================= */
 
 @media (prefers-reduced-motion: reduce) {
-
     .loader-ring,
     .loader-ring::after,
-    .status-dot {
+    .status-dot,
+    .exchange-icon,
+    .arrow,
+    .arrow::before {
         animation: none;
     }
 
@@ -932,190 +791,216 @@ body {
         transition: none;
     }
 }
+</style></head><body><div class="page"><!-- ================= TOP HEADER ================= --><header class="top-header"><div class="brand-row">
 
-</style>
+    <div class="brand">
 
-</head>
+        <div class="brand-icon">
+            💳
+        </div>
 
+        <div class="brand-text">
+            <strong>Transfer Center</strong>
+            <span>Incoming transfer</span>
+        </div>
 
-<body>
+    </div>
 
-<div class="page">
+    <div class="secure-badge">
+        SECURE
+    </div>
 
+</div>
 
-    <!-- ================= TOP HEADER ================= -->
+<div class="title-section">
 
-    <header class="top-header">
+    <!-- ANIMATED DOLLAR RING -->
 
+    <div class="icon-wrapper">
 
-        <div class="brand-row">
+        <div class="loader-ring"></div>
 
+        <div class="dollar">
+            $
+        </div>
 
-            <div class="brand">
+    </div>
 
+    <div class="title-text">
 
-                <div class="brand-icon">
-                    💳
-                </div>
+        <h1>Incoming Transfers</h1>
 
+        <p>
+            Review your incoming transfer information
+            and complete the required verification.
+        </p>
 
-                <div class="brand-text">
+    </div>
 
-                    <strong>
-                        Transfer Center
-                    </strong>
+</div>
 
-                    <span>
-                        Incoming transfer
-                    </span>
+<!-- BLINKING GREEN STATUS -->
 
-                </div>
+<div class="ready-status">
 
+    <span class="status-dot"></span>
 
-            </div>
+    Transfer information is ready for review
 
+</div>
 
-            <div class="secure-badge">
-                SECURE
-            </div>
+</header><!-- ================= MAIN CARD ================= --><main class="card"><!-- ================= TRANSFER SUMMARY ================= --><section class="transfer-box"><div class="transfer-label">
+    TRANSFER SUMMARY
+</div>
 
+<div class="currency-line">
+
+    <!-- USD -->
+
+    <div class="currency">
+
+        <div class="currency-code">
+
+            <span class="flag">🇺🇸</span>
+
+            USD
 
         </div>
 
+        <div class="currency-amount">
+            $10,000.00
+        </div>
 
+    </div>
 
-        <div class="title-section">
+    <!-- ROLLING PROFESSIONAL EXCHANGE ICON -->
 
+    <div class="arrow" aria-label="Currency exchange animation">
 
-            <!-- ANIMATED DOLLAR RING -->
+        <svg
+            class="exchange-icon"
+            viewBox="0 0 48 48"
+            aria-hidden="true"
+            focusable="false"
+        >
 
-            <div class="icon-wrapper">
+            <defs>
 
-                <div class="loader-ring"></div>
+                <linearGradient
+                    id="exchangeGradient"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                >
 
-                <div class="dollar">
-                    $
-                </div>
+                    <stop
+                        offset="0%"
+                        stop-color="#ffffff"
+                    />
 
-            </div>
+                    <stop
+                        offset="100%"
+                        stop-color="#d8e2ff"
+                    />
 
+                </linearGradient>
 
+            </defs>
 
-            <div class="title-text">
+            <!-- Upper exchange arrow -->
 
-                <h1>
-                    Incoming Transfers
-                </h1>
+            <g class="exchange-top">
 
-                <p>
-                    Review your incoming transfer information
-                    and complete the required verification.
-                </p>
+                <path
+                    d="M9 18
+                       C10 10, 17 6, 25 7
+                       C30 7, 34 10, 37 14"
+                    fill="none"
+                    stroke="url(#exchangeGradient)"
+                    stroke-width="3.4"
+                    stroke-linecap="round"
+                />
 
-            </div>
+                <path
+                    d="M30 14
+                       L37 15
+                       L38 8"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="3.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
 
+            </g>
+
+            <!-- Lower exchange arrow -->
+
+            <g class="exchange-bottom">
+
+                <path
+                    d="M39 30
+                       C37 38, 30 42, 22 41
+                       C17 41, 13 38, 10 34"
+                    fill="none"
+                    stroke="url(#exchangeGradient)"
+                    stroke-width="3.4"
+                    stroke-linecap="round"
+                />
+
+                <path
+                    d="M18 34
+                       L10 33
+                       L9 40"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="3.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </g>
+
+            <!-- Center glow -->
+
+            <circle
+                class="exchange-center"
+                cx="24"
+                cy="24"
+                r="2.6"
+            />
+
+        </svg>
+
+    </div>
+
+    <!-- MXN -->
+
+    <div class="currency">
+
+        <div class="currency-code">
+
+            <span class="flag">🇲🇽</span>
+
+            MXN
 
         </div>
 
-
-
-        <!-- BLINKING GREEN STATUS -->
-
-        <div class="ready-status">
-
-            <span class="status-dot"></span>
-
-            Transfer information is ready for review
-
+        <div class="currency-amount">
+            $180,000.00
         </div>
 
+    </div>
 
-    </header>
+</div>
 
+<div class="fixed-label">
+    Fixed displayed transfer amount
+</div>
 
-
-    <!-- ================= MAIN CARD ================= -->
-
-    <main class="card">
-
-
-        <!-- ================= TRANSFER SUMMARY ================= -->
-
-        <section class="transfer-box">
-
-
-            <div class="transfer-label">
-                TRANSFER SUMMARY
-            </div>
-
-
-
-            <div class="currency-line">
-
-
-                <!-- USD -->
-
-                <div class="currency">
-
-                    <div class="currency-code">
-
-                        <span class="flag">
-                            🇺🇸
-                        </span>
-
-                        USD
-
-                    </div>
-
-
-                    <div class="currency-amount">
-                        $10,000.00
-                    </div>
-
-                </div>
-
-
-
-                <!-- TRANSFER ICON -->
-
-                <div class="arrow">
-                    ⇄
-                </div>
-
-
-
-                <!-- MXN -->
-
-                <div class="currency">
-
-                    <div class="currency-code">
-
-                        <span class="flag">
-                            🇲🇽
-                        </span>
-
-                        MXN
-
-                    </div>
-
-
-                    <div class="currency-amount">
-                        $180,000.00
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="fixed-label">
-                Fixed displayed transfer amount
-            </div>
-
-
-        </section>
+</section>
+        
 
 
 
@@ -1266,7 +1151,7 @@ body {
     </footer>
 
 
-</div>
+</>
 
 
 
@@ -1565,4 +1450,4 @@ function submitCode() {
 </script>
 
 </body>
-</html>
+    </html>
