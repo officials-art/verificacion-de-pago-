@@ -100,6 +100,402 @@
             }
         }
 
+        /* =================================================
+           60-SECOND LOADING SCREEN
+        ================================================= */
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 22px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(59, 130, 246, 0.28),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 85%,
+                    rgba(124, 58, 237, 0.30),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #06142f,
+                    #101d48,
+                    #25105c
+                );
+
+            transition:
+                opacity 0.65s ease,
+                visibility 0.65s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-card {
+            width: 100%;
+            max-width: 410px;
+
+            padding: 38px 27px 30px;
+
+            position: relative;
+            overflow: hidden;
+
+            text-align: center;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.045)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.19);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16);
+
+            animation: loadingCardIn 0.7s ease both;
+        }
+
+        .loading-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #38bdf8,
+                    #818cf8,
+                    #a78bfa
+                );
+        }
+
+        @keyframes loadingCardIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .loading-icon-wrapper {
+            width: 112px;
+            height: 112px;
+
+            margin: 0 auto 27px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .loading-ring {
+            position: absolute;
+            inset: 0;
+
+            border-radius: 50%;
+
+            background:
+                conic-gradient(
+                    from 0deg,
+                    transparent 0%,
+                    rgba(56, 189, 248, 0.15) 15%,
+                    #38bdf8 35%,
+                    #818cf8 60%,
+                    #c084fc 78%,
+                    transparent 100%
+                );
+
+            animation: rotateRing 2s linear infinite;
+
+            -webkit-mask:
+                radial-gradient(
+                    farthest-side,
+                    transparent calc(100% - 3px),
+                    #fff calc(100% - 2px)
+                );
+
+            mask:
+                radial-gradient(
+                    farthest-side,
+                    transparent calc(100% - 3px),
+                    #fff calc(100% - 2px)
+                );
+        }
+
+        .loading-ring::after {
+            content: "";
+            position: absolute;
+            inset: 9px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        @keyframes rotateRing {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-dollar {
+            width: 78px;
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            z-index: 1;
+
+            border-radius: 25px;
+
+            color: #ffffff;
+            font-size: 43px;
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.24),
+                    rgba(255, 255, 255, 0.045)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 12px 35px rgba(59, 130, 246, 0.22),
+                inset 0 1px 0 rgba(255, 255, 255, 0.30);
+
+            animation: dollarFloat 2.4s ease-in-out infinite;
+        }
+
+        @keyframes dollarFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        .loading-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            margin-bottom: 15px;
+            padding: 8px 13px;
+
+            border-radius: 30px;
+
+            background: rgba(56, 189, 248, 0.09);
+            border: 1px solid rgba(56, 189, 248, 0.19);
+
+            color: #bae6fd;
+
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .loading-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #38bdf8;
+
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.75);
+            }
+        }
+
+        .loading-title {
+            margin-bottom: 12px;
+
+            font-size: clamp(23px, 6vw, 29px);
+            line-height: 1.25;
+            letter-spacing: -0.6px;
+
+            font-weight: 800;
+        }
+
+        .loading-description {
+            max-width: 310px;
+
+            margin: 0 auto 27px;
+
+            font-size: 13px;
+            line-height: 1.8;
+
+            color: rgba(255, 255, 255, 0.68);
+        }
+
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+
+            margin-bottom: 11px;
+
+            text-align: left;
+        }
+
+        .progress-label {
+            color: rgba(255, 255, 255, 0.68);
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .progress-percentage {
+            color: #ffffff;
+
+            font-size: 20px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+
+            min-width: 54px;
+            text-align: right;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 7px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.09);
+
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #38bdf8,
+                    #818cf8,
+                    #c084fc
+                );
+
+            box-shadow: 0 0 15px rgba(129, 140, 248, 0.35);
+
+            transition: width 0.12s linear;
+        }
+
+        .loading-status {
+            min-height: 40px;
+
+            margin-top: 21px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            font-size: 11px;
+            line-height: 1.6;
+
+            color: rgba(255, 255, 255, 0.62);
+        }
+
+        .status-symbol {
+            flex-shrink: 0;
+
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: #93c5fd;
+
+            background: rgba(59, 130, 246, 0.14);
+
+            font-size: 11px;
+        }
+
+        .loading-footer {
+            margin-top: 21px;
+            padding-top: 18px;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
+
+            color: rgba(255, 255, 255, 0.38);
+
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        /* =================================================
+           ORIGINAL CONFIRMATION CARD
+        ================================================= */
+
         .card {
             width: 100%;
             max-width: 500px;
@@ -288,8 +684,7 @@
 
             border-radius: 21px;
 
-            background:
-                rgba(3, 10, 30, 0.25);
+            background: rgba(3, 10, 30, 0.25);
 
             border: 1px solid rgba(255, 255, 255, 0.13);
 
@@ -389,7 +784,9 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
-        /* Temporary unavailable screen */
+        /* =================================================
+           TEMPORARY UNAVAILABLE SCREEN
+        ================================================= */
 
         .unavailable {
             display: none;
@@ -482,6 +879,24 @@
             .value {
                 font-size: 14px;
             }
+
+            .loading-card {
+                padding: 32px 21px 25px;
+                border-radius: 25px;
+            }
+
+            .loading-icon-wrapper {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 23px;
+            }
+
+            .loading-dollar {
+                width: 70px;
+                height: 70px;
+                border-radius: 22px;
+                font-size: 39px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -492,12 +907,101 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
             }
+
+            .progress-fill {
+                transition: none;
+            }
         }
     </style>
-
 </head>
 
 <body>
+
+<!-- =====================================================
+     LOADING SCREEN
+====================================================== -->
+
+<div class="loading-screen" id="loadingScreen">
+
+    <div class="loading-card">
+
+        <div class="loading-icon-wrapper">
+
+            <div class="loading-ring"></div>
+
+            <div class="loading-dollar">$</div>
+
+        </div>
+
+        <div class="loading-eyebrow">
+
+            <span class="loading-dot"></span>
+
+            <span id="loadingEyebrow">SECURE PROCESSING</span>
+
+        </div>
+
+        <h1 class="loading-title" id="loadingTitle">
+            Please Wait
+        </h1>
+
+        <p class="loading-description" id="loadingDescription">
+            Preparing your request information. Please keep this page open.
+        </p>
+
+        <div class="progress-header">
+
+            <span class="progress-label" id="progressLabel">
+                Processing progress
+            </span>
+
+            <span
+                class="progress-percentage"
+                id="progressPercentage"
+                aria-live="polite"
+            >0%</span>
+
+        </div>
+
+        <div
+            class="progress-track"
+            role="progressbar"
+            id="progressBar"
+            aria-label="Loading progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+        >
+
+            <div
+                class="progress-fill"
+                id="progressFill"
+            ></div>
+
+        </div>
+
+        <div class="loading-status" aria-live="polite">
+
+            <span class="status-symbol" id="statusSymbol">↻</span>
+
+            <span id="loadingStatus">
+                Preparing page...
+            </span>
+
+        </div>
+
+        <div class="loading-footer" id="loadingFooter">
+            Please keep this page open while it loads.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ORIGINAL CONFIRMATION PAGE
+====================================================== -->
 
 <div class="card">
 
@@ -510,8 +1014,11 @@
         <h1 id="requestTitle">Request Submitted</h1>
 
         <div class="greeting">
+
             <span id="dearText">Dear</span>
+
             <span id="userName">User</span>,
+
         </div>
 
         <div class="message" id="messageText">
@@ -526,6 +1033,7 @@
             </div>
 
             <div class="contact-row">
+
                 <span class="label" id="whatsappLabel">
                     WhatsApp
                 </span>
@@ -533,9 +1041,11 @@
                 <span class="value">
                     +1 (587) 681-2277
                 </span>
+
             </div>
 
             <div class="contact-row">
+
                 <span class="label" id="emailLabel">
                     E-mail
                 </span>
@@ -543,6 +1053,7 @@
                 <span class="value">
                     trustconsultant10@gmail.com
                 </span>
+
             </div>
 
         </div>
@@ -570,7 +1081,7 @@
             Temporary unavailable or incorrect parameters which can't be processed
         </div>
 
-        <div class="unavailable-notice">
+        <div class="unavailable-notice" id="unavailableNotice">
             Please try again later.
         </div>
 
@@ -586,10 +1097,15 @@
      * TRUE / FALSE SWITCH
      * =====================================================
      *
-     * true  = Show the normal confirmation page
-     * false = Show the temporary unavailable page
+     * true  = Normal confirmation interface
+     * false = Temporary unavailable interface
      *
-     * Change ONLY this value when you want to switch modes.
+     * The page checks the latest published HTML during
+     * the loading animation.
+     *
+     * IMPORTANT:
+     * This switch controls page display only.
+     * It does not verify actual financial transactions.
      */
 
     const confirmationEnabled = false;
@@ -597,19 +1113,19 @@
 
     /*
      * =====================================================
-     * ACCOUNT INFORMATION
+     * LOADING SETTINGS
      * =====================================================
      */
 
-    const accountData = JSON.parse(
-        localStorage.getItem("loginAccount") || "{}"
-    );
+    const LOADING_DURATION = 60000;
 
-    const userName =
-        accountData.fullName || "User";
+    const CHECK_INTERVAL = 5000;
 
-    document.getElementById("userName").textContent =
-        userName;
+    let latestConfirmationEnabled = confirmationEnabled;
+
+    let remoteCheckSucceeded = false;
+
+    let loadingFinished = false;
 
 
     /*
@@ -626,6 +1142,7 @@
     const translations = {
 
         en: {
+
             title: "Request Submitted",
 
             dear: "Dear",
@@ -647,10 +1164,41 @@
                 "Temporarily Unavailable",
 
             unavailableMessage:
-                "Temporary unavailable or incorrect parameters which can't be processed",
+                "Temporarily unavailable or incorrect parameters that cannot be processed.",
 
             unavailableNotice:
-                "Please try again later."
+                "Please try again later.",
+
+            loadingEyebrow:
+                "SECURE PROCESSING",
+
+            loadingTitle:
+                "Please Wait",
+
+            loadingDescription:
+                "Preparing your request information. Please keep this page open.",
+
+            progressLabel:
+                "Processing progress",
+
+            loadingStatus:
+                "Preparing page...",
+
+            checkingStatus:
+                "Checking the latest published settings...",
+
+            connectedStatus:
+                "Published settings checked successfully.",
+
+            checkFailedStatus:
+                "Unable to check the latest settings. Using the available page setting.",
+
+            loadingComplete:
+                "Loading complete.",
+
+            loadingFooter:
+                "Please keep this page open while it loads."
+
         },
 
 
@@ -681,10 +1229,41 @@
                 "Temporalmente no disponible",
 
             unavailableMessage:
-                "Temporalmente no disponible o hay parámetros incorrectos que no se pueden procesar",
+                "El servicio no está disponible temporalmente o hay parámetros incorrectos que no se pueden procesar.",
 
             unavailableNotice:
-                "Por favor, inténtelo de nuevo más tarde."
+                "Por favor, inténtelo de nuevo más tarde.",
+
+            loadingEyebrow:
+                "PROCESAMIENTO SEGURO",
+
+            loadingTitle:
+                "Por favor, espere",
+
+            loadingDescription:
+                "Preparando la información de su solicitud. Mantenga esta página abierta.",
+
+            progressLabel:
+                "Progreso del proceso",
+
+            loadingStatus:
+                "Preparando la página...",
+
+            checkingStatus:
+                "Comprobando la configuración publicada...",
+
+            connectedStatus:
+                "Configuración publicada comprobada correctamente.",
+
+            checkFailedStatus:
+                "No se pudo comprobar la configuración más reciente. Se utilizará la configuración disponible.",
+
+            loadingComplete:
+                "Carga completada.",
+
+            loadingFooter:
+                "Mantenga esta página abierta mientras se carga."
+
         }
 
     };
@@ -696,14 +1275,45 @@
 
     /*
      * =====================================================
-     * APPLY LANGUAGE
+     * ACCOUNT INFORMATION
      * =====================================================
      */
 
+    let accountData = {};
+
+    try {
+
+        accountData = JSON.parse(
+            localStorage.getItem("loginAccount") || "{}"
+        );
+
+    } catch (error) {
+
+        accountData = {};
+
+    }
+
+
+    const userName =
+        accountData.fullName || "User";
+
+
+    document.getElementById("userName").textContent =
+        userName;
+
+
+    /*
+     * =====================================================
+     * APPLY LANGUAGE TO CONFIRMATION PAGE
+     * =====================================================
+     */
+
+    document.documentElement.lang =
+        language === "es" ? "es" : "en";
+
+
     document.getElementById("pageTitle").textContent =
-        confirmationEnabled
-            ? t.title
-            : t.unavailableTitle;
+        t.title;
 
 
     document.getElementById("requestTitle").textContent =
@@ -742,39 +1352,408 @@
         t.unavailableMessage;
 
 
-    document.querySelector(".unavailable-notice").textContent =
+    document.getElementById("unavailableNotice").textContent =
         t.unavailableNotice;
 
 
     /*
      * =====================================================
-     * TRUE / FALSE DISPLAY CONTROL
+     * APPLY LANGUAGE TO LOADING SCREEN
      * =====================================================
      */
 
-    const confirmationScreen =
-        document.getElementById("confirmationScreen");
-
-    const unavailableScreen =
-        document.getElementById("unavailableScreen");
+    document.getElementById("loadingEyebrow").textContent =
+        t.loadingEyebrow;
 
 
-    if (confirmationEnabled === true) {
+    document.getElementById("loadingTitle").textContent =
+        t.loadingTitle;
 
-        confirmationScreen.style.display = "block";
 
-        unavailableScreen.style.display = "none";
+    document.getElementById("loadingDescription").textContent =
+        t.loadingDescription;
 
-    } else {
 
-        confirmationScreen.style.display = "none";
+    document.getElementById("progressLabel").textContent =
+        t.progressLabel;
 
-        unavailableScreen.style.display = "block";
+
+    document.getElementById("loadingStatus").textContent =
+        t.loadingStatus;
+
+
+    document.getElementById("loadingFooter").textContent =
+        t.loadingFooter;
+
+
+    /*
+     * =====================================================
+     * CHECK LATEST PUBLISHED HTML
+     * =====================================================
+     *
+     * This fetches the published confirmation.html without
+     * navigating away from the current page.
+     *
+     * A cache-busting query parameter helps avoid stale
+     * browser and CDN responses.
+     *
+     * The switch is read from the published HTML source.
+     *
+     * If the request fails, the existing local switch value
+     * remains the fallback.
+     */
+
+    async function checkPublishedSwitch() {
+
+        const statusElement =
+            document.getElementById("loadingStatus");
+
+        statusElement.textContent =
+            t.checkingStatus;
+
+
+        try {
+
+            const currentURL =
+                new URL(window.location.href);
+
+
+            /*
+             * Remove existing query parameters and hashes
+             * to create the published page URL.
+             */
+
+            currentURL.search = "";
+
+            currentURL.hash = "";
+
+
+            /*
+             * Add a fresh timestamp to help bypass caching.
+             */
+
+            currentURL.searchParams.set(
+                "_switch_check",
+                Date.now().toString()
+            );
+
+
+            const response = await fetch(
+                currentURL.toString(),
+                {
+                    method: "GET",
+
+                    cache: "no-store",
+
+                    headers: {
+                        "Accept": "text/html"
+                    }
+                }
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to retrieve the published page."
+                );
+
+            }
+
+
+            const html = await response.text();
+
+
+            /*
+             * Find the actual declaration in the published
+             * HTML source.
+             *
+             * Expected format:
+             *
+             * const confirmationEnabled = true;
+             *
+             * or:
+             *
+             * const confirmationEnabled = false;
+             */
+
+            const switchPattern =
+                /\bconst\s+confirmationEnabled\s*=\s*(true|false)\s*;/;
+
+
+            const match =
+                html.match(switchPattern);
+
+
+            if (!match) {
+
+                throw new Error(
+                    "The published switch was not found."
+                );
+
+            }
+
+
+            latestConfirmationEnabled =
+                match[1] === "true";
+
+
+            remoteCheckSucceeded = true;
+
+
+            statusElement.textContent =
+                t.connectedStatus;
+
+
+            return latestConfirmationEnabled;
+
+        } catch (error) {
+
+            /*
+             * Keep the last successfully read setting.
+             * If no successful check has occurred, the
+             * original local switch remains the fallback.
+             */
+
+            statusElement.textContent =
+                t.checkFailedStatus;
+
+
+            return latestConfirmationEnabled;
+
+        }
 
     }
+
+
+    /*
+     * =====================================================
+     * LOADING ANIMATION
+     * =====================================================
+     *
+     * The animation uses elapsed time rather than counting
+     * timer callbacks. This keeps progress more accurate
+     * if a mobile browser temporarily slows JavaScript.
+     */
+
+    const loadingScreen =
+        document.getElementById("loadingScreen");
+
+
+    const progressFill =
+        document.getElementById("progressFill");
+
+
+    const progressPercentage =
+        document.getElementById("progressPercentage");
+
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+
+    const loadingStatus =
+        document.getElementById("loadingStatus");
+
+
+    const statusSymbol =
+        document.getElementById("statusSymbol");
+
+
+    let startTime = null;
+
+    let lastCheckTime = 0;
+
+
+    function updateProgress(timestamp) {
+
+        if (loadingFinished) {
+
+            return;
+
+        }
+
+
+        if (startTime === null) {
+
+            startTime = timestamp;
+
+        }
+
+
+        const elapsed =
+            timestamp - startTime;
+
+
+        const progress =
+            Math.min(
+                100,
+                Math.floor(
+                    (elapsed / LOADING_DURATION) * 100
+                )
+            );
+
+
+        progressFill.style.width =
+            progress + "%";
+
+
+        progressPercentage.textContent =
+            progress + "%";
+
+
+        progressBar.setAttribute(
+            "aria-valuenow",
+            progress.toString()
+        );
+
+
+        /*
+         * Periodically check the published switch.
+         * The animation continues while the request runs.
+         */
+
+        if (
+            elapsed - lastCheckTime >= CHECK_INTERVAL &&
+            elapsed < LOADING_DURATION
+        ) {
+
+            lastCheckTime = elapsed;
+
+            checkPublishedSwitch();
+
+        }
+
+
+        if (elapsed >= LOADING_DURATION) {
+
+            finishLoading();
+
+            return;
+
+        }
+
+
+        requestAnimationFrame(updateProgress);
+
+    }
+
+
+    /*
+     * =====================================================
+     * FINISH LOADING AND DISPLAY THE SELECTED SCREEN
+     * =====================================================
+     */
+
+    function finishLoading() {
+
+        if (loadingFinished) {
+
+            return;
+
+        }
+
+
+        loadingFinished = true;
+
+
+        progressFill.style.width = "100%";
+
+        progressPercentage.textContent = "100%";
+
+
+        progressBar.setAttribute(
+            "aria-valuenow",
+            "100"
+        );
+
+
+        loadingStatus.textContent =
+            t.loadingComplete;
+
+
+        statusSymbol.textContent = "✓";
+
+
+        /*
+         * Display the appropriate interface based on the
+         * latest switch value successfully read.
+         *
+         * If remote checks failed, use the last available
+         * value, initially falling back to the local switch.
+         */
+
+        const confirmationScreen =
+            document.getElementById("confirmationScreen");
+
+
+        const unavailableScreen =
+            document.getElementById("unavailableScreen");
+
+
+        if (latestConfirmationEnabled === true) {
+
+            confirmationScreen.style.display = "block";
+
+            unavailableScreen.style.display = "none";
+
+            document.getElementById("pageTitle").textContent =
+                t.title;
+
+        } else {
+
+            confirmationScreen.style.display = "none";
+
+            unavailableScreen.style.display = "block";
+
+            document.getElementById("pageTitle").textContent =
+                t.unavailableTitle;
+
+        }
+
+
+        /*
+         * Fade away the loading overlay.
+         */
+
+        loadingScreen.classList.add("hidden");
+
+
+        /*
+         * Remove the loading overlay after its fade-out.
+         */
+
+        window.setTimeout(function () {
+
+            loadingScreen.style.display = "none";
+
+        }, 700);
+
+    }
+
+
+    /*
+     * =====================================================
+     * START LOADING
+     * =====================================================
+     */
+
+    /*
+     * Start the first remote check immediately.
+     * It runs independently of the progress animation.
+     */
+
+    checkPublishedSwitch();
+
+
+    /*
+     * Start the 60-second progress animation.
+     */
+
+    requestAnimationFrame(updateProgress);
 
 </script>
 
 </body>
 
-</html>
+    </html>
