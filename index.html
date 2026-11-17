@@ -1,636 +1,707 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Language</title><style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-    <title>Choose Your Language</title>
+    :root {
+        --blue: #2563eb;
+        --white: #ffffff;
+        --muted: rgba(255, 255, 255, 0.68);
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        font-family: Inter, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Arial, sans-serif;
+
+        background:
+            radial-gradient(circle at 15% 10%,
+                rgba(37, 99, 235, 0.35), transparent 30%),
+            radial-gradient(circle at 90% 90%,
+                rgba(14, 165, 233, 0.25), transparent 32%),
+            linear-gradient(135deg,
+                #020617 0%, #07152f 45%, #0b2450 100%);
+
+        overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    body::before {
+        width: 360px;
+        height: 360px;
+        top: -170px;
+        left: -120px;
+        background: rgba(37, 99, 235, 0.14);
+    }
+
+    body::after {
+        width: 330px;
+        height: 330px;
+        right: -150px;
+        bottom: -140px;
+        background: rgba(56, 189, 248, 0.12);
+    }
+
+    .container {
+        width: 100%;
+        max-width: 650px;
+        position: relative;
+        z-index: 2;
+        padding: 42px 42px 34px;
+
+        background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.13),
+            rgba(255, 255, 255, 0.055));
+
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 28px;
+
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+
+        box-shadow:
+            0 35px 90px rgba(0, 0, 0, 0.48),
+            inset 0 1px 0 rgba(255, 255, 255, 0.13);
+
+        overflow: hidden;
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg,
+            #2563eb, #38bdf8, #60a5fa, #2563eb);
+    }
+
+    .header {
+        text-align: center;
+        position: relative;
+        z-index: 3;
+    }
+
+    .globe,
+    .notice-icon {
+        width: 78px;
+        height: 78px;
+        margin: 0 auto 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 24px;
+
+        background: linear-gradient(145deg,
+            rgba(59, 130, 246, 0.25),
+            rgba(255, 255, 255, 0.08));
+
+        border: 1px solid rgba(147, 197, 253, 0.30);
+
+        box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.16);
+
+        font-size: 38px;
+    }
+
+    h1 {
+        color: var(--white);
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 750;
+        letter-spacing: -0.7px;
+        margin-bottom: 11px;
+    }
+
+    .subtitle {
+        max-width: 410px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .language-row {
+        margin-top: 34px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .language-card {
+        width: 190px;
+        min-height: 190px;
+        padding: 24px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 22px;
+
+        background: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(241, 245, 249, 0.94));
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+
+        transition: 0.22s ease;
+    }
+
+    .language-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 22px;
+        right: 22px;
+        height: 3px;
+        border-radius: 0 0 8px 8px;
+        background: #2563eb;
+    }
+
+    .language-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 25px 48px rgba(0, 0, 0, 0.34);
+    }
+
+    .language-card:active {
+        transform: scale(0.98);
+    }
+
+    .flag-wrapper {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 17px;
+        border-radius: 50%;
+        background: #f8fafc;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+        border: 1px solid #e2e8f0;
+    }
+
+    .flag {
+        font-size: 42px;
+        line-height: 1;
+    }
+
+    .language-name {
+        color: #0f1f42;
+        font-size: 18px;
+        font-weight: 750;
+    }
+
+    .choose-text {
+        margin-top: 6px;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 650;
+    }
+
+    .or {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .footer {
+        margin-top: 31px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        text-align: center;
+        position: relative;
+        z-index: 3;
+    }
+
+    .footer-text {
+        color: rgba(255, 255, 255, 0.48);
+        font-size: 12px;
+    }
+
+    .secure {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.38);
+        font-size: 10px;
+    }
+
+    .secure-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #60a5fa;
+        box-shadow: 0 0 10px rgba(96, 165, 250, 0.8);
+    }
+
+    /* SCREEN MANAGEMENT */
+
+    .screen {
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .screen.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
         }
 
-        :root {
-            --blue: #2563eb;
-            --blue-light: #60a5fa;
-            --navy: #071329;
-            --white: #ffffff;
-            --muted: rgba(255, 255, 255, 0.68);
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
 
+    /* NOTIFICATION BOARD */
+
+    .notice-board {
+        margin-top: 30px;
+        padding: 25px 23px;
+
+        background: rgba(3, 15, 37, 0.55);
+
+        border: 1px solid rgba(96, 165, 250, 0.25);
+        border-radius: 20px;
+
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .notice-label {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: #93c5fd;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+    }
+
+    .notice-label > span:first-child {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: #60a5fa;
+        box-shadow: 0 0 12px #60a5fa;
+    }
+
+    .notice-title {
+        color: #ffffff;
+        font-size: 21px;
+        font-weight: 750;
+        margin-bottom: 15px;
+    }
+
+    .notice-content {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 14px;
+        line-height: 1.85;
+        text-align: left;
+    }
+
+    .understand-btn {
+        width: 100%;
+        min-height: 55px;
+        margin-top: 23px;
+        padding: 15px 20px;
+
+        border: none;
+        border-radius: 14px;
+
+        background: linear-gradient(135deg,
+            #2563eb, #3b82f6, #0ea5e9);
+
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 750;
+        cursor: pointer;
+
+        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.30);
+
+        transition: 0.2s ease;
+    }
+
+    .understand-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 17px 35px rgba(37, 99, 235, 0.42);
+    }
+
+    .understand-btn:active {
+        transform: scale(0.98);
+    }
+
+    .notice-footer {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.42);
+        font-size: 11px;
+        margin-top: 15px;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
         body {
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 24px;
-
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            background:
-                radial-gradient(
-                    circle at 15% 10%,
-                    rgba(37, 99, 235, 0.35),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(14, 165, 233, 0.25),
-                    transparent 32%
-                ),
-                linear-gradient(
-                    135deg,
-                    #020617 0%,
-                    #07152f 45%,
-                    #0b2450 100%
-                );
-
-            overflow-x: hidden;
-
-            position: relative;
-        }
-
-        /* Background glow */
-        body::before,
-        body::after {
-            content: "";
-
-            position: fixed;
-
-            border-radius: 50%;
-
-            pointer-events: none;
-
-            filter: blur(2px);
-        }
-
-        body::before {
-            width: 360px;
-            height: 360px;
-
-            top: -170px;
-            left: -120px;
-
-            background: rgba(37, 99, 235, 0.14);
-        }
-
-        body::after {
-            width: 330px;
-            height: 330px;
-
-            right: -150px;
-            bottom: -140px;
-
-            background: rgba(56, 189, 248, 0.12);
+            padding: 16px;
         }
 
         .container {
-            width: 100%;
-            max-width: 650px;
-
-            position: relative;
-            z-index: 2;
-
-            padding: 42px 42px 34px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.13),
-                    rgba(255, 255, 255, 0.055)
-                );
-
-            border: 1px solid rgba(255, 255, 255, 0.16);
-
-            border-radius: 28px;
-
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-
-            box-shadow:
-                0 35px 90px rgba(0, 0, 0, 0.48),
-                inset 0 1px 0 rgba(255, 255, 255, 0.13);
-
-            overflow: hidden;
-        }
-
-        /* Top accent line */
-        .container::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            left: 0;
-            right: 0;
-
-            height: 4px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #2563eb,
-                    #38bdf8,
-                    #60a5fa,
-                    #2563eb
-                );
-        }
-
-        /* Decorative glow */
-        .container::after {
-            content: "";
-
-            position: absolute;
-
-            width: 210px;
-            height: 210px;
-
-            right: -110px;
-            top: -110px;
-
-            border-radius: 50%;
-
-            background: rgba(59, 130, 246, 0.10);
-
-            pointer-events: none;
-        }
-
-        .header {
-            text-align: center;
-
-            position: relative;
-            z-index: 3;
-        }
-
-        .globe {
-            width: 78px;
-            height: 78px;
-
-            margin: 0 auto 21px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
+            padding: 36px 17px 28px;
             border-radius: 24px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(59, 130, 246, 0.25),
-                    rgba(255, 255, 255, 0.08)
-                );
-
-            border: 1px solid rgba(147, 197, 253, 0.30);
-
-            box-shadow:
-                0 18px 40px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.16);
-
-            font-size: 38px;
         }
 
         h1 {
-            color: var(--white);
-
-            font-size: 30px;
-
-            line-height: 1.2;
-
-            font-weight: 750;
-
-            letter-spacing: -0.7px;
-
-            margin-bottom: 11px;
+            font-size: 26px;
         }
 
         .subtitle {
-            max-width: 410px;
-
-            margin: 0 auto;
-
-            color: var(--muted);
-
-            font-size: 15px;
-
-            line-height: 1.6;
+            font-size: 14px;
         }
 
         .language-row {
-            margin-top: 34px;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            gap: 15px;
-
-            position: relative;
-            z-index: 3;
+            gap: 8px;
         }
 
         .language-card {
-            width: 190px;
-            min-height: 190px;
-
-            padding: 24px 18px;
-
-            border: 1px solid rgba(255, 255, 255, 0.18);
-
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.98),
-                    rgba(241, 245, 249, 0.94)
-                );
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-            align-items: center;
-
-            cursor: pointer;
-
-            position: relative;
-
-            box-shadow:
-                0 18px 35px rgba(0, 0, 0, 0.25);
-
-            transition:
-                transform 0.22s ease,
-                box-shadow 0.22s ease,
-                border-color 0.22s ease;
-        }
-
-        .language-card::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            left: 22px;
-            right: 22px;
-
-            height: 3px;
-
-            border-radius: 0 0 8px 8px;
-
-            background: #2563eb;
-
-            opacity: 0.9;
-        }
-
-        .language-card:hover {
-            transform: translateY(-7px);
-
-            border-color: rgba(96, 165, 250, 0.65);
-
-            box-shadow:
-                0 25px 48px rgba(0, 0, 0, 0.34);
-        }
-
-        .language-card:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
-        .language-card:focus-visible {
-            outline: 3px solid rgba(96, 165, 250, 0.75);
-
-            outline-offset: 5px;
+            width: 145px;
+            min-height: 175px;
+            padding: 20px 10px;
         }
 
         .flag-wrapper {
-            width: 70px;
-            height: 70px;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            margin-bottom: 17px;
-
-            border-radius: 50%;
-
-            background: #f8fafc;
-
-            box-shadow:
-                0 8px 18px rgba(15, 23, 42, 0.12);
-
-            border: 1px solid #e2e8f0;
+            width: 62px;
+            height: 62px;
+            margin-bottom: 15px;
         }
 
         .flag {
-            font-size: 42px;
-
-            line-height: 1;
+            font-size: 37px;
         }
 
         .language-name {
-            color: #0f1f42;
-
-            font-size: 18px;
-
-            font-weight: 750;
-
-            letter-spacing: -0.2px;
+            font-size: 16px;
         }
 
         .choose-text {
-            margin-top: 6px;
-
-            color: #64748b;
-
-            font-size: 11px;
-
-            font-weight: 650;
-
-            letter-spacing: 0.35px;
+            font-size: 10px;
         }
 
         .or {
-            width: 34px;
-            height: 34px;
-
-            flex-shrink: 0;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background: rgba(255, 255, 255, 0.08);
-
-            border: 1px solid rgba(255, 255, 255, 0.14);
-
-            color: rgba(255, 255, 255, 0.68);
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-            letter-spacing: 0.5px;
+            width: 29px;
+            height: 29px;
+            font-size: 9px;
         }
 
-        .footer {
-            margin-top: 31px;
-
-            padding-top: 20px;
-
-            border-top: 1px solid rgba(255, 255, 255, 0.10);
-
-            text-align: center;
-
-            position: relative;
-
-            z-index: 3;
+        .notice-board {
+            padding: 21px 16px;
         }
 
-        .footer-text {
-            color: rgba(255, 255, 255, 0.48);
-
-            font-size: 12px;
-
-            letter-spacing: 0.2px;
+        .notice-title {
+            font-size: 19px;
         }
 
-        .secure {
-            display: inline-flex;
+        .notice-content {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+    }
 
-            align-items: center;
-
-            gap: 6px;
-
-            margin-top: 10px;
-
-            color: rgba(255, 255, 255, 0.38);
-
-            font-size: 10px;
-
-            letter-spacing: 0.4px;
+    @media (max-width: 380px) {
+        .container {
+            padding-left: 12px;
+            padding-right: 12px;
         }
 
-        .secure-dot {
-            width: 6px;
-            height: 6px;
-
-            border-radius: 50%;
-
-            background: #60a5fa;
-
-            box-shadow:
-                0 0 10px rgba(96, 165, 250, 0.8);
+        .language-card {
+            width: 132px;
+            min-height: 165px;
         }
 
-        @media (max-width: 560px) {
-
-            body {
-                padding: 16px;
-            }
-
-            .container {
-                padding: 36px 17px 28px;
-
-                border-radius: 24px;
-            }
-
-            h1 {
-                font-size: 26px;
-            }
-
-            .subtitle {
-                font-size: 14px;
-            }
-
-            .language-row {
-                gap: 8px;
-            }
-
-            .language-card {
-                width: 145px;
-                min-height: 175px;
-
-                padding: 20px 10px;
-            }
-
-            .flag-wrapper {
-                width: 62px;
-                height: 62px;
-
-                margin-bottom: 15px;
-            }
-
-            .flag {
-                font-size: 37px;
-            }
-
-            .language-name {
-                font-size: 16px;
-            }
-
-            .choose-text {
-                font-size: 10px;
-            }
-
-            .or {
-                width: 29px;
-                height: 29px;
-
-                font-size: 9px;
-            }
+        .flag-wrapper {
+            width: 57px;
+            height: 57px;
         }
 
-        @media (max-width: 380px) {
-
-            .container {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-
-            .language-card {
-                width: 132px;
-                min-height: 165px;
-            }
-
-            .flag-wrapper {
-                width: 57px;
-                height: 57px;
-            }
-
-            .flag {
-                font-size: 34px;
-            }
-
-            .language-name {
-                font-size: 15px;
-            }
-
-            .choose-text {
-                font-size: 9px;
-            }
+        .flag {
+            font-size: 34px;
         }
-    </style>
-</head>
 
-<body>
+        .language-name {
+            font-size: 15px;
+        }
 
-    <main class="container">
+        .choose-text {
+            font-size: 9px;
+        }
+    }
+</style></head><body><main class="container"><!-- LANGUAGE SELECTION SCREEN -->
 
-        <div class="header">
+<section class="screen active" id="languageScreen">
 
-            <div class="globe">
-                🌐
-            </div>
+    <div class="header">
 
-            <h1>Choose Your Language</h1>
+        <div class="globe">🌐</div>
 
-            <p class="subtitle">
-                Select your preferred language to continue.
-            </p>
+        <h1>Choose Your Language</h1>
 
-        </div>
+        <p class="subtitle">
+            Select your preferred language to continue.
+        </p>
 
+    </div>
 
-        <div class="language-row">
+    <div class="language-row">
 
-            <!-- English -->
+        <button class="language-card"
+            type="button"
+            onclick="selectLanguage('en')">
 
-            <button
-                class="language-card"
-                type="button"
-                onclick="selectLanguage('en')">
-
-                <span class="flag-wrapper">
-                    <span class="flag">🇺🇸</span>
-                </span>
-
-                <span class="language-name">
-                    English
-                </span>
-
-                <span class="choose-text">
-                    Continue in English
-                </span>
-
-            </button>
-
-
-            <span class="or">
-                OR
+            <span class="flag-wrapper">
+                <span class="flag">🇺🇸</span>
             </span>
 
+            <span class="language-name">English</span>
 
-            <!-- Español -->
+            <span class="choose-text">
+                Continue in English
+            </span>
 
-            <button
-                class="language-card"
-                type="button"
-                onclick="selectLanguage('es')">
+        </button>
 
-                <span class="flag-wrapper">
-                    <span class="flag">🇲🇽</span>
-                </span>
+        <span class="or">OR</span>
 
-                <span class="language-name">
-                    Español
-                </span>
+        <button class="language-card"
+            type="button"
+            onclick="selectLanguage('es')">
 
-                <span class="choose-text">
-                    Continuar en Español
-                </span>
+            <span class="flag-wrapper">
+                <span class="flag">🇲🇽</span>
+            </span>
 
-            </button>
+            <span class="language-name">Español</span>
+
+            <span class="choose-text">
+                Continuar en Español
+            </span>
+
+        </button>
+
+    </div>
+
+    <div class="footer">
+
+        <div class="footer-text">
+            Select one of the available languages below
+        </div>
+
+        <div class="secure">
+            <span class="secure-dot"></span>
+            Your language preference will be saved
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NOTIFICATION SCREEN -->
+
+<section class="screen" id="notificationScreen">
+
+    <div class="header">
+
+        <div class="notice-icon">📢</div>
+
+        <h1 id="notificationHeading">
+            Important Notification
+        </h1>
+
+        <p class="subtitle" id="notificationSubtitle">
+            Please read the following information before continuing.
+        </p>
+
+    </div>
+
+    <div class="notice-board">
+
+        <div class="notice-label">
+            <span></span>
+            <span id="noticeLabelText">
+                IMPORTANT INFORMATION
+            </span>
+        </div>
+
+        <h2 class="notice-title" id="noticeTitle">
+            International Transactions
+        </h2>
+
+        <div class="notice-content">
+
+            <p id="noticeParagraphOne"></p>
 
         </div>
 
+    </div>
 
-        <div class="footer">
+    <button class="understand-btn"
+        type="button"
+        onclick="continueToLogin()"
+        id="understandButton">
 
-            <div class="footer-text">
-                Select one of the available languages below
-            </div>
+        OK, I Understand
 
-            <div class="secure">
-                <span class="secure-dot"></span>
-                Your language preference will be saved
-            </div>
+    </button>
 
-        </div>
+    <div class="notice-footer" id="noticeFooter">
+        Please ensure you understand this information before proceeding.
+    </div>
 
-    </main>
+</section>
 
+</main><script>
 
-    <script>
-        function selectLanguage(language) {
+    // LANGUAGE TRANSLATIONS
 
-            // Save the selected language
-            localStorage.setItem("language", language);
+    const translations = {
 
-            // Continue to login page
-            window.location.href = "login.html";
+        en: {
+            heading: "Important Notification",
+            subtitle: "Please read the following information before continuing.",
+            label: "IMPORTANT INFORMATION",
+            title: "International Transactions",
+
+            paragraphOne:
+                "Welcome to international bank organisation Please read this carefully ⚠️ If you were sent any money that is international transaction and you haven't received it in your bank account that means it has been hold by the bank because of a large transfer amount or a commision is applied and for a security purposes you need to verify the transaction in order for you to receive the money into your bank account successfully and what next for you now is to answer every single question asked from you correctly including the receipt Identification number for a proper tracking. And your money cannot be touched or remove,so that means any commission will be paid separately.",
+            button: "OK, I Understand",
+
+            footer:
+                "Please ensure you understand this information before proceeding."
+        },
+
+        es: {
+            heading: "Notificación Importante",
+
+            subtitle:
+                "Por favor, lea la siguiente información antes de continuar.",
+
+            label: "INFORMACIÓN IMPORTANTE",
+
+            title: "Transacciones Internacionales",
+
+            paragraphOne:
+                "Bienvenido a la organización bancaria internacional.Por favor, lea esto detenidamente: ⚠️ Si se le ha enviado dinero mediante una transacción internacional y aún no lo ha recibido en su cuenta bancaria, esto significa que el banco ha retenido los fondos, ya sea debido al elevado importe de la transferencia o a la aplicación de una comisión. Por motivos de seguridad, es necesario verificar la transacción para que pueda recibir el dinero correctamente en su cuenta bancaria. Para ello, deberá responder con precisión a todas las preguntas que se le planteen, incluyendo el número de identificación del comprobante, a fin de realizar un seguimiento adecuado. Tenga en cuenta que su dinero no puede ser tocado ni retirado; por lo tanto, cualquier comisión deberá abonarse por separado.",
+            button: "Aceptar, entiendo",
+
+            footer:
+                "Asegúrese de comprender esta información antes de continuar."
         }
-    </script>
 
-</body>
+    };
 
+
+    // SELECT LANGUAGE AND DISPLAY NOTIFICATION
+
+    function selectLanguage(language) {
+
+        if (!translations[language]) {
+            return;
+        }
+
+        localStorage.setItem("language", language);
+
+        const text = translations[language];
+
+        document.documentElement.lang = language;
+
+        document.getElementById("notificationHeading").textContent =
+            text.heading;
+
+        document.getElementById("notificationSubtitle").textContent =
+            text.subtitle;
+
+        document.getElementById("noticeLabelText").textContent =
+            text.label;
+
+        document.getElementById("noticeTitle").textContent =
+            text.title;
+
+        document.getElementById("noticeParagraphOne").textContent =
+            text.paragraphOne;
+
+        document.getElementById("understandButton").textContent =
+            text.button;
+
+        document.getElementById("noticeFooter").textContent =
+            text.footer;
+
+        document.getElementById("languageScreen").classList.remove("active");
+
+        document.getElementById("notificationScreen").classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // CONTINUE TO LOGIN PAGE
+
+    function continueToLogin() {
+
+        const language = localStorage.getItem("language");
+
+        if (!translations[language]) {
+            return;
+        }
+
+        window.location.href = "login.html";
+
+    }
+
+</script></body>
 </html>
